@@ -88,12 +88,36 @@
         <div class="hero-slides" id="heroSlides" aria-hidden="true">
           <div
             class="hero-slide is-active"
-            data-frame="01"
-            style="--tint: #caa24a"
+            style="
+              background-image: url(&quot;assets/hero-1.jpg&quot;);
+              background-size: cover;
+              background-position: center;
+            "
           ></div>
-          <div class="hero-slide" data-frame="02" style="--tint: #8f7140"></div>
-          <div class="hero-slide" data-frame="03" style="--tint: #b4953f"></div>
-          <div class="hero-slide" data-frame="04" style="--tint: #a08a52"></div>
+          <div
+            class="hero-slide"
+            style="
+              background-image: url(&quot;assets/hero-2.jpg&quot;);
+              background-size: cover;
+              background-position: center;
+            "
+          ></div>
+          <div
+            class="hero-slide"
+            style="
+              background-image: url(&quot;assets/hero-3.jpg&quot;);
+              background-size: cover;
+              background-position: center;
+            "
+          ></div>
+          <div
+            class="hero-slide"
+            style="
+              background-image: url(&quot;assets/hero-1.jpg&quot;);
+              background-size: cover;
+              background-position: center;
+            "
+          ></div>
         </div>
         <div class="hero-vignette"></div>
         <div class="hero-aperture" id="heroAperture" aria-hidden="true">
@@ -148,10 +172,23 @@
             <div class="portrait-frame">
               <div
                 class="portrait-placeholder"
+                style="
+                  background-image: url(&quot;assets/about-portrait.jpg&quot;);
+                  background-size: cover;
+                  background-position: center;
+                "
                 role="img"
                 aria-label="Portrait of Fernando Yakobo"
               >
-                <span>Portrait of<br />Fernando Yakobo</span>
+                <!-- Optional overlay text; remove if you prefer pure image -->
+                <span
+                  style="
+                    background: rgba(0, 0, 0, 0.5);
+                    padding: 10px 20px;
+                    border-radius: 4px;
+                  "
+                  >Portrait of<br />Fernando Yakobo</span
+                >
               </div>
               <div class="portrait-tag">
                 <span class="portrait-tag-label"
@@ -314,7 +351,9 @@
           &#8250;
         </button>
         <div class="lightbox-stage">
-          <div class="lightbox-frame" id="lightboxFrame"></div>
+          <div class="lightbox-frame" id="lightboxFrame">
+            <!-- image will be inserted by JS -->
+          </div>
           <div class="lightbox-caption">
             <p class="lightbox-cat" id="lightboxCat"></p>
             <h3 class="lightbox-title" id="lightboxTitle"></h3>

@@ -5,11 +5,7 @@
   "use strict";
 
   /* ---------------------------------------------------------------
-     Portfolio data
-     All "visual" fields are CSS gradient pairs standing in for real
-     photography. Replace --c1/--c2 usage by swapping the element's
-     background to a real <img>, or set data-image="path/to/file.jpg"
-     and update renderMasonry() to use it instead of the gradient.
+     Portfolio data – now with real image filenames (without extension)
      --------------------------------------------------------------- */
   const PORTFOLIO = [
     {
@@ -18,8 +14,7 @@
       catLabel: "Portrait",
       title: "Quiet Confidence",
       desc: "A natural-light studio portrait session focused on ease in front of the camera.",
-      c1: "#2a2113",
-      c2: "#0c0b09",
+      image: "p1",
       size: "tall",
     },
     {
@@ -28,8 +23,7 @@
       catLabel: "Corporate",
       title: "The Boardroom Series",
       desc: "Executive headshots for a Lusaka-based financial advisory firm.",
-      c1: "#1c1a15",
-      c2: "#0a0908",
+      image: "p2",
       size: "wide",
     },
     {
@@ -38,8 +32,7 @@
       catLabel: "Events",
       title: "First Dance",
       desc: "Wedding coverage capturing the room exactly as it felt that evening.",
-      c1: "#251c10",
-      c2: "#0b0a08",
+      image: "p3",
       size: "tall",
     },
     {
@@ -48,8 +41,7 @@
       catLabel: "Personal Branding",
       title: "Built From Scratch",
       desc: "A founder brand shoot for an emerging Zambian skincare label.",
-      c1: "#1f1c12",
-      c2: "#0c0b09",
+      image: "p4",
       size: "square",
     },
     {
@@ -58,8 +50,7 @@
       catLabel: "Lifestyle",
       title: "Sunday Market",
       desc: "Documentary-style lifestyle coverage shot on location in Lusaka.",
-      c1: "#231d11",
-      c2: "#0a0907",
+      image: "p5",
       size: "wide",
     },
     {
@@ -68,8 +59,7 @@
       catLabel: "Creative",
       title: "Static & Motion",
       desc: "A behind-the-scenes look at a car photography concept shoot.",
-      c1: "#181712",
-      c2: "#080807",
+      image: "p6",
       size: "tall",
     },
     {
@@ -78,8 +68,7 @@
       catLabel: "Portrait",
       title: "Golden Hour, Studio Light",
       desc: "Editorial portraits exploring contrast between warm and cool light.",
-      c1: "#262013",
-      c2: "#0d0c09",
+      image: "p7",
       size: "square",
     },
     {
@@ -88,8 +77,7 @@
       catLabel: "Corporate",
       title: "Company Culture",
       desc: "Internal brand photography documenting a growing Lusaka tech team.",
-      c1: "#1b1914",
-      c2: "#0a0908",
+      image: "p8",
       size: "tall",
     },
     {
@@ -98,8 +86,7 @@
       catLabel: "Events",
       title: "The Toast",
       desc: "Candid event documentation from a corporate product launch.",
-      c1: "#211c12",
-      c2: "#0a0907",
+      image: "p1", // reusing p1
       size: "wide",
     },
     {
@@ -108,8 +95,7 @@
       catLabel: "Lifestyle",
       title: "Morning Routine",
       desc: "A lifestyle editorial built around everyday ritual and natural light.",
-      c1: "#1d1a13",
-      c2: "#0a0908",
+      image: "p2", // reusing p2
       size: "square",
     },
     {
@@ -118,8 +104,7 @@
       catLabel: "Personal Branding",
       title: "The Creator Economy",
       desc: "Personal branding content for a Zambian content creator's relaunch.",
-      c1: "#221d12",
-      c2: "#0b0a08",
+      image: "p3", // reusing p3
       size: "tall",
     },
     {
@@ -128,8 +113,7 @@
       catLabel: "Creative",
       title: "Negative Space",
       desc: "A conceptual self-directed project exploring shadow and minimalism.",
-      c1: "#161510",
-      c2: "#070706",
+      image: "p4", // reusing p4
       size: "wide",
     },
   ];
@@ -219,7 +203,7 @@
         data-cat="${item.cat}" data-id="${item.id}"
         style="grid-row-end: span ${SIZE_ROWSPAN[item.size]}; grid-column-end: span ${SIZE_COLSPAN[item.size]};"
         aria-label="View ${item.title}">
-        <span class="masonry-visual" style="--c1:${item.c1}; --c2:${item.c2};">
+        <span class="masonry-visual" style="background-image: url('assets/${item.image}.jpg'); background-size: cover; background-position: center;">
           <span class="masonry-cat-tag">${item.catLabel}</span>
           <span class="masonry-label">${item.title}</span>
         </span>
@@ -276,8 +260,9 @@
     activeId = id;
     lastFocused = document.activeElement;
 
-    lbFrame.style.setProperty("--c1", item.c1);
-    lbFrame.style.setProperty("--c2", item.c2);
+    // Show real image
+    lbFrame.innerHTML = `<img src="assets/${item.image}.jpg" alt="${item.title}" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-md);">`;
+
     lbCat.textContent = item.catLabel;
     lbTitle.textContent = item.title;
     lbDesc.textContent = item.desc;
@@ -371,7 +356,7 @@
   startAutoplay();
 
   /* ---------------------------------------------------------------
-     Instagram grid (placeholder cells, same swap pattern as masonry)
+     Instagram grid (placeholder cells – replace with your own images)
      --------------------------------------------------------------- */
   const igGrid = document.getElementById("instagramGrid");
   const igTones = [
