@@ -24,18 +24,64 @@ if (heroImgs.length > 1) {
 
 // ---------- Portfolio data ----------
 const projects = [
-  { id: "p1", title: "Golden Hour",   category: "Portrait",          desc: "Studio portrait series exploring warmth, posture, and stillness.", img: "assets/images/portfolio-portrait.jpg", tall: true },
-  { id: "p2", title: "The Executive", category: "Corporate",         desc: "Boardroom headshot for a Lusaka-based fintech founder.",          img: "assets/images/portfolio-executive.jpg" },
-  { id: "p3", title: "Vows",          category: "Event",             desc: "An intimate ceremony captured under candlelight and chandeliers.",img: "assets/images/portfolio-vows.jpg",      tall: true },
-  { id: "p4", title: "Morning Pages", category: "Lifestyle",         desc: "A quiet morning ritual, captured in natural window light.",       img: "assets/images/portfolio-lifestyle.jpg" },
-  { id: "p5", title: "Maison Noir",   category: "Branding",          desc: "Product story for a luxury fragrance house.",                     img: "assets/images/portfolio-branding.jpg" },
-  { id: "p6", title: "Spectrum",      category: "Creative",          desc: "Color-gel portrait study exploring identity and contrast.",       img: "assets/images/portfolio-creative.jpg",  tall: true },
-  { id: "p7", title: "Founder Series",category: "Personal Branding", desc: "A founder portrait set built around warmth and presence.",        img: "assets/images/portfolio-personal.jpg" },
-  { id: "p8", title: "Mainstage",     category: "Event",             desc: "A keynote moment, lit by a single beam of light.",                img: "assets/images/portfolio-event.jpg" },
+  {
+    id: "p1",
+    title: "Golden Hour",
+    category: "Portrait",
+    desc: "Studio portrait series exploring warmth, posture, and stillness.",
+    img: "assets/images/portfolio-portrait.jpg",
+    tall: true,
+  },
+  {
+    id: "p2",
+    title: "The Executive",
+    category: "Corporate",
+    desc: "Boardroom headshot for a Lusaka-based fintech founder.",
+    img: "assets/images/portfolio-executive.jpg",
+  },
+  {
+    id: "p3",
+    title: "Vows",
+    category: "Event",
+    desc: "An intimate ceremony captured under candlelight and chandeliers.",
+    img: "assets/images/portfolio-vows.jpg",
+    tall: true,
+  },
+  {
+    id: "p4",
+    title: "Morning Pages",
+    category: "Lifestyle",
+    desc: "A quiet morning ritual, captured in natural window light.",
+    img: "assets/images/portfolio-lifestyle.jpg",
+  },
+  {
+    id: "p5",
+    title: "Maison Noir",
+    category: "Branding",
+    desc: "Product story for a luxury fragrance house.",
+    img: "assets/images/portfolio-branding.jpg",
+  },
+  {
+    id: "p6",
+    title: "Spectrum",
+    category: "Creative",
+    desc: "Color-gel portrait study exploring identity and contrast.",
+    img: "assets/images/portfolio-creative.jpg",
+    tall: true,
+  },
+  {
+    id: "p7",
+    title: "Founder Series",
+    category: "Personal Branding",
+    desc: "A founder portrait set built around warmth and presence.",
+    img: "assets/images/portfolio-personal.jpg",
+  },
 ];
 
 const masonry = document.getElementById("masonry");
-masonry.innerHTML = projects.map(p => `
+masonry.innerHTML = projects
+  .map(
+    (p) => `
   <button class="tile ${p.tall ? "tall" : ""}" data-id="${p.id}">
     <img src="${p.img}" alt="${p.title}" loading="lazy" />
     <div class="overlay"></div>
@@ -45,7 +91,9 @@ masonry.innerHTML = projects.map(p => `
     </div>
     <span class="corner"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
   </button>
-`).join("");
+`,
+  )
+  .join("");
 
 // ---------- Lightbox ----------
 const lb = document.getElementById("lightbox");
@@ -79,13 +127,17 @@ function closeLightbox() {
 masonry.addEventListener("click", (e) => {
   const tile = e.target.closest(".tile");
   if (!tile) return;
-  const project = projects.find(p => p.id === tile.dataset.id);
+  const project = projects.find((p) => p.id === tile.dataset.id);
   if (project) openLightbox(project);
 });
 
 lbClose.addEventListener("click", closeLightbox);
-lb.addEventListener("click", (e) => { if (e.target === lb) closeLightbox(); });
-document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLightbox(); });
+lb.addEventListener("click", (e) => {
+  if (e.target === lb) closeLightbox();
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeLightbox();
+});
 
 // ---------- Contact form (static, ready for backend) ----------
 const form = document.getElementById("contactForm");
@@ -93,23 +145,27 @@ const formMsg = document.getElementById("formMsg");
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   // TODO: wire to your backend (Formspree, Netlify Forms, custom API, etc.)
-  formMsg.textContent = "Thanks — your message is queued. We'll be in touch within 24 hours.";
+  formMsg.textContent =
+    "Thanks — your message is queued. We'll be in touch within 24 hours.";
   form.reset();
 });
 
 // ---------- Reveal on scroll ----------
 const revealTargets = document.querySelectorAll(
-  ".section h2, .section .eyebrow, .svc, .feat, .test, .tile, .ig-grid a, .about-photo, .about-copy, .contact-form, .contact-list, .head-note"
+  ".section h2, .section .eyebrow, .svc, .feat, .test, .tile, .ig-grid a, .about-photo, .about-copy, .contact-form, .contact-list, .head-note",
 );
-revealTargets.forEach(el => el.classList.add("reveal"));
+revealTargets.forEach((el) => el.classList.add("reveal"));
 
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-      io.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
+const io = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        io.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.12 },
+);
 
-revealTargets.forEach(el => io.observe(el));
+revealTargets.forEach((el) => io.observe(el));
